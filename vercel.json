@@ -1,15 +1,13 @@
 {
-    "functions": {
-      "api/*.py": {
-        "memory": 512,
-        "maxDuration": 10
-      }
-    },
-    "ignore": [
-      "venv",
-      "__pycache__",
-      "*.sqlite3",
-      "*.log",
-      "node_modules"
+    "builds": [{
+        "src": "myproject/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "myproject/wsgi.py"
+        }
     ]
-  }
+}
